@@ -1,1 +1,1 @@
-dockerfiles
+A collection of curated Dockerfiles used at ermiry and for ermiry projects.
