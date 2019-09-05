@@ -10,6 +10,9 @@ RUN apt-get install -y build-essential cmake wget unzip pkg-config \
     libatlas-base-dev gfortran \
     python3-dev
 
+RUN apt-get -y install python3-pip
+RUN pip3 install numpy
+
 # get opencv source
 WORKDIR /opencv
 RUN wget -O opencv.zip https://github.com/opencv/opencv/archive/3.4.7.zip
@@ -23,9 +26,11 @@ RUN mkdir build
 WORKDIR /opencv/opencv/build
 RUN cmake -D CMAKE_BUILD_TYPE=RELEASE \
 	-D CMAKE_INSTALL_PREFIX=/usr/local \
+    -D INSTALL_PYTHON_EXAMPLES=ON \
 	-D INSTALL_C_EXAMPLES=ON \
 	-D OPENCV_ENABLE_NONFREE=ON \
 	-D OPENCV_EXTRA_MODULES_PATH=/opencv/opencv_contrib/modules \
+    -D PYTHON_EXECUTABLE=/usr/bin/python3.6 \
 	-D BUILD_EXAMPLES=ON ..
 RUN make -j8 && make install && ldconfig
 
