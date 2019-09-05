@@ -28,3 +28,5 @@ RUN cmake -D CMAKE_BUILD_TYPE=RELEASE \
 	-D OPENCV_EXTRA_MODULES_PATH=/opencv/opencv_contrib/modules \
 	-D BUILD_EXAMPLES=ON ..
 RUN make -j8 && make install && ldconfig
+
+CMD [ "/bin/bash" ]
